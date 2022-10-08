@@ -1,6 +1,13 @@
 $theme-colors: (
 	"primary": #77C9D4,
-	"secondary": #57BC90,
 );
+
+.cursor-pointer{
+	cursor: pointer;
+}
+
+.hover:hover{
+	color: #57BC90;
+}
 
 @import '~bootstrap/scss/bootstrap';
