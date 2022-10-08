@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './custom.scss';
-import App from './App';
+import Dashboard from './Components/Dashboard';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -10,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<React.StrictMode>
-		<App />
+		<Dashboard />
 	</React.StrictMode>
 );
