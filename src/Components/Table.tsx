@@ -1,5 +1,6 @@
 import React from 'react';
 import Product from './Product';
+import Requests from '../services/api-requests';
 
 interface IState {
     data: Array<Object>,
@@ -72,16 +73,6 @@ export default class Table extends React.Component<IProps, IState> {
      * @returns - The table
      */
     private renderTable = (data: any): React.ReactNode =>{
-        let rows = data.map((product: any) => {
-            return (
-                <Product 
-                    key={product.id} 
-                    item={product} 
-                    handleCheck={this.handleCheck}
-                />
-            );
-        });
-
         return (
             <table className='table table-hover'>
                 <thead>
@@ -90,38 +81,17 @@ export default class Table extends React.Component<IProps, IState> {
                         <th key='name'>Name</th>
                         <th key='category'>Category</th>
                         <th key='price'>Price</th>
-                        <th key='actions'>Actions</th>
+                        <th key='actions' className='text-end'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {rows}
+                    {data.map((product: any) => {
+                        return (<Product key={product.Id} item={product} handleCheck={this.handleCheck} />);
+                    })}  
                 </tbody>
             </table>
         );
     }
-
-        // return (
-        //     <div className='table-responsive'>
-        //         <table className='table'>
-        //             <thead>
-        //                 <tr>
-        //                     <th scope='col'><input type="checkbox"/></th>
-        //                     {/*Render the headings*/}
-        //                     {keys.map((key: any, i) => {
-        //                         return <th scope="col" key={i}>{key}</th>
-        //                     })}
-        //                     <th scope='col'></th>
-        //                 </tr>
-        //             </thead>
-        //             <tbody>
-        //                 {/*Render the products*/}
-        //                 {data.map((product: any) => {
-        //                     return <Product handleCheck={this.handleCheck.bind(this)} item={product} key={product.Id}/>
-        //                 })}
-        //             </tbody>
-        //         </table>
-        //     </div>
-        // );
     
     render = (): React.ReactNode => {
         // Contents are bound to the state
@@ -141,24 +111,29 @@ export default class Table extends React.Component<IProps, IState> {
      */
     getData = async (): Promise<void> => {
         if(this.props.viewAll) {
-            const response = await fetch('https://gendacproficiencytest.azurewebsites.net/api/ProductsAPI');
-            const data = await response.json();
-            this.setState({data: data, loading: false});
+            Requests.getAll()
+            .then((response) => {
+                this.setState({data: response.data, loading: false});
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         } 
         else {
-            let url: string = "https://gendacproficiencytest.azurewebsites.net/api/ProductsAPI?";
+            let params = new Map<String, any>();
+            params.set('page', this.props.page);
+            params.set('pageSize', this.props.pageSize);
+            params.set('orderBy', this.props.orderBy);
+            params.set('ascending', this.props.ascending);
+            params.set('filter', this.props.filter);
 
-            // Checks to add parameters to the url
-            if (this.props.page !== undefined) url += "page=" + this.props.page + "&";
-            if (this.props.pageSize !== undefined) url += "pageSize=" + this.props.pageSize + "&";
-            if (this.props.orderBy !== undefined) url += "orderBy=" + this.props.orderBy + "&";
-            if (this.props.ascending !== undefined) url += "ascending=" + this.props.ascending + "&";
-            if (this.props.filter !== undefined) url += "filter=" + this.props.filter + "&";
-            url = url.slice(0, -1);
-
-            const response = await fetch(url);
-            const returnData = await response.json();
-            this.setState({ data: returnData.Results, loading: false });
+            Requests.customSearch(params)
+            .then((response) => {
+                this.setState({data: response.data.Results, loading: false});
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         }
     }
 }
