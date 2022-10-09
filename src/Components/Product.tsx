@@ -20,7 +20,7 @@ export default class Product extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             // Map of the item's state excluding Id
-            itemState: new Map(Object.entries(this.props.item).filter(([key, value]) => key !== "Id")),
+            itemState: new Map(Object.entries(this.props.item)),
             checked: false
         };
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -34,16 +34,17 @@ export default class Product extends React.Component<IProps, IState> {
     render(): React.ReactNode {
         return (
             <tr>
-                <td>
+                <td key="checkbox">
                     <input className='cursor-pointer' type="checkbox" checked={this.state.checked} onChange={this.handleCheckboxChange.bind(this)}/>
                 </td>
                 {/*Render the data*/}
                 {Array.from(this.state.itemState).map((item: any, i) => {
-                    return <td className='pe-none' key={i}>{item[1]}</td>
+                    //get if from state
+                    if(item[0] !== "Id") return <td className='pe-none' key={i}>{item[1]}</td>
                 })}
                 {/* Adds trigger icon to show more settings */}
-                <td className='text-center'>
-                    <Button variant="none" size="sm">
+                <td key="action" className='text-end'>
+                    <Button variant="none" size="sm" className='me-2'>
                         <RiEdit2Line className='cursor-pointer fs-5 hover'/>
                     </Button>
                 </td>
