@@ -30,7 +30,7 @@ export default class CreateProduct extends React.Component<IProps, IState> {
 
     render = (): React.ReactNode => {
         return (
-            <Modal show={this.props.show} onHide={this.handleModalClose}>
+            <Modal show={this.props.show} centered onHide={this.handleModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Product</Modal.Title>
                 </Modal.Header>
@@ -58,7 +58,7 @@ export default class CreateProduct extends React.Component<IProps, IState> {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" className='w-100 p-2 text-white' onClick={this.handleModalClose}>
+                    <Button variant="primary" className='w-100 p-2 text-white'>
                         Create Product
                     </Button>
                 </Modal.Footer>
