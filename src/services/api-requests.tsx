@@ -8,8 +8,13 @@ const get = (id: any) => {
     return http.get(`/${id}`);
 }
 
-const create = (data: any) => {
-    return http.post("/", data);
+const create = (name: any, category: any, price: any) => {
+    return http.post("/", {
+        Id: 1,
+        Name: name,
+        Category: category,
+        Price: price
+    });
 }
 
 const update = (id: any, data: any) => {
