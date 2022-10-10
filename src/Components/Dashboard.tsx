@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './Table';
-import CreateProduct from './CreateProduct';
+import CreateProduct from '../views/CreateProductModal';
+import { ToastContainer } from 'react-toastify';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
 interface IState {
@@ -23,7 +24,7 @@ export default class Dashboard extends React.Component<IProps, IState> {
             page: 1,
             pageSize: 10,
             orderBy: "Id",
-            ascending: true,
+            ascending: false,
             filter: "",
             viewAll: false,
             modal: false
@@ -62,8 +63,10 @@ export default class Dashboard extends React.Component<IProps, IState> {
                         </button>
                     </div>
                 </div>
-                <Table page={this.state.page} pageSize={this.state.pageSize} orderBy={this.state.orderBy} ascending={this.state.ascending} filter={this.state.filter} viewAll={this.state.viewAll} />
+                <Table page={this.state.page} pageSize={this.state.pageSize} orderBy={this.state.orderBy} ascending={this.state.ascending} filter={this.state.filter} viewAll={this.state.viewAll}/>
                 <CreateProduct show={this.state.modal} hideModal={this.hideModal.bind(this)}/>
+                <div id='toast-container'></div>
+                <ToastContainer position="top-center" autoClose={5000} hideProgressBar newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored"/>
             </div>
         );
     }
