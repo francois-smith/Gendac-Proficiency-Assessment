@@ -53,18 +53,14 @@ export default class Table extends React.Component<IProps, IState> {
      */
     deleteSelectedProducts = async (): Promise<void> =>{
         for(let item of this.state.selected){
-            console.log(item);
-            await fetch(`https://gendacproficiencytest.azurewebsites.net/api/ProductsAPI/${item}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+            Requests.remove(item)
+            .catch((error) => {
+                console.log(error);
             });
         }
         this.setState({selected: []});
         this.getData();
     }
-
 
     /**
      * @brief This function renders the table with input data.
@@ -100,8 +96,12 @@ export default class Table extends React.Component<IProps, IState> {
 
         return (
             <div>
-                <button className='active btn btn-danger text-light p-2' onClick={this.deleteSelectedProducts}>Delete Selected</button>
-                {contents}
+                <div className="table-container">
+                    {contents}
+                </div>
+                <div>
+                    <button className='active btn btn-danger text-light p-2' onClick={this.deleteSelectedProducts}>Delete Selected</button>
+                </div>
             </div>
         );
     }
