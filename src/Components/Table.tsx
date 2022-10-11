@@ -4,11 +4,11 @@ import Requests from '../services/api-requests';
 
 interface IState {
     data: Array<Object>,
-    loading: Boolean,
-    selected: Array<Object>
+    loading: Boolean
 }
 
 interface IProps {
+    handleCheck: Function,
     page?: Number,
     pageSize?: Number,
     orderBy?: String,
@@ -22,8 +22,7 @@ export default class Table extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             data: [],
-            loading: true,
-            selected: []
+            loading: true
         };
     }
 
@@ -31,34 +30,6 @@ export default class Table extends React.Component<IProps, IState> {
      * Wait for the component to mount and then fetch the data
      */
     componentDidMount = (): void =>{
-        this.getData();
-    }
-
-    /**
-     * @brief Handles when checkboxes are checked and manages array of selected items.
-     * @param checked - Whether the checkbox is checked or not
-     * @param productId - The id of the item
-     */
-    handleCheck = (checked: Boolean, productId: Number) => {
-        if(checked){
-            this.setState({selected: [...this.state.selected, productId]});
-        } 
-        else{
-            this.setState({selected: this.state.selected.filter((item) => item !== productId)});
-        }
-    }
-
-    /**
-     * @brief Handles when the delete button is clicked and deletes the selected items.
-     */
-    deleteSelectedProducts = async (): Promise<void> =>{
-        for(let item of this.state.selected){
-            Requests.remove(item)
-            .catch((error) => {
-                console.log(error);
-            });
-        }
-        this.setState({selected: []});
         this.getData();
     }
 
@@ -82,7 +53,7 @@ export default class Table extends React.Component<IProps, IState> {
                 </thead>
                 <tbody>
                     {data.map((product: any) => {
-                        return (<Product key={product.Id} item={product} handleCheck={this.handleCheck} />);
+                        return (<Product key={product.Id} item={product} handleCheck={this.props.handleCheck} />);
                     })}  
                 </tbody>
             </table>
@@ -95,13 +66,8 @@ export default class Table extends React.Component<IProps, IState> {
         let contents = this.state.loading ? <p><em>Loading...</em></p> : this.renderTable(this.state.data);
 
         return (
-            <div>
-                <div className="table-container">
-                    {contents}
-                </div>
-                <div>
-                    <button className='active btn btn-danger text-light p-2' onClick={this.deleteSelectedProducts}>Delete Selected</button>
-                </div>
+            <div className="table-container">
+                {contents}
             </div>
         );
     }
