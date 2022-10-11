@@ -1,13 +1,26 @@
 $theme-colors: (
-	"primary": #77C9D4,
+	"primary": #005da8,
+	"warning": #d9282f
 );
+
+:root{
+	--toastify-color-success: #005da8;
+	--toastify-color-error: #d9282f;
+}
 
 .cursor-pointer{
 	cursor: pointer;
 }
 
-.hover:hover{
-	color: #77C9D4;
+.main-logo{
+	width: 50px;
+	width: 50px;
 }
 
+.hover:hover{
+	color: #005da8;
+}
+
+
+@import '~react-toastify/scss/_variables.scss';
 @import '~bootstrap/scss/bootstrap';
