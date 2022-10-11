@@ -1,7 +1,8 @@
 /**
- * Validation file, can easily expand and add more validation functions to use in the app
+ * @brief This function validates the passed in name, throws an exception if its invalid that can be handled to display relevant messages to client.
+ * @param name - The name of the product
+ * @returns - Valid || Error
  */
-
 const productName = (name: String) => {
     if(name.length > 0) {
         return true;
@@ -11,6 +12,11 @@ const productName = (name: String) => {
     }
 };
 
+/**
+ * @brief This function validates the passed in category, throws an exception if its invalid that can be handled to display relevant messages to client.
+ * @param category - The category of the product
+ * @returns - Valid || Error
+ */
 const productCategory = (category: Number) => {
     if(category <= 0) {
         throw new Error("Please select a category");
@@ -23,6 +29,11 @@ const productCategory = (category: Number) => {
     }
 }
 
+/**
+ * @brief This function validates the passed in price, throws an exception if its invalid that can be handled to display relevant messages to client.
+ * @param price - The price of the product
+ * @returns - Valid || Error
+ */
 const productPrice = (price: Number) => {
     if(price > 0) {
         return true;
@@ -32,6 +43,9 @@ const productPrice = (price: Number) => {
     }
 }
 
+/**
+ * Validation file, can easily expand and add more validation functions to use in the app
+ */
 const Validate = {
     productName,
     productCategory,
