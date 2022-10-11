@@ -35,7 +35,7 @@ export default class Dashboard extends React.Component<{}, IState> {
             page: 1,
             pageSize: 10,
             orderBy: "Id",
-            ascending: false,
+            ascending: true,
             filter: "",
             viewAll: false,
             modal: false,
@@ -144,7 +144,7 @@ export default class Dashboard extends React.Component<{}, IState> {
     }
      
     handlePageChange = (page: number) => {
-        this.setState({page: page}, () => { console.log(this.state.page) });
+        this.setState({page: page}, () => { this.getProducts(); });
     }
 
     render(): React.ReactNode {
