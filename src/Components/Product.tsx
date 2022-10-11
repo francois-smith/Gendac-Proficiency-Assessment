@@ -1,9 +1,7 @@
 import React from 'react';
-import { MdOutlineMoreVert } from 'react-icons/md';
 import { RiEdit2Line } from 'react-icons/ri';
-import { IoMdTrash } from 'react-icons/io';
 import Button from 'react-bootstrap/Button';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { ModalType } from '../utils/CustomTypes';
 
 interface IState {
     itemState: Map<String, any>,
@@ -12,9 +10,13 @@ interface IState {
 
 interface IProps {
     item: Object,
-    handleCheck: Function
+    handleCheck: Function,
+    showModal: Function,
 }
 
+/**
+ * This component is used to render a single row in the table.
+ */
 export default class Product extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
@@ -26,6 +28,10 @@ export default class Product extends React.Component<IProps, IState> {
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     }
 
+    /**
+     * @brief This function is called when the checkbox is clicked. It updates the state of the checkbox and calls the handleCheck function from the parent component.
+     * @param event - The event that triggered this function
+     */
     handleCheckboxChange(event: any): void {
         this.setState({checked: event.target.checked});
         this.props.handleCheck(event.target.checked, this.state.itemState.get("Id"));
@@ -45,7 +51,7 @@ export default class Product extends React.Component<IProps, IState> {
                 {/* Adds trigger icon to show more settings */}
                 <td key="action" className='text-end'>
                     <Button variant="none" size="sm" className='me-2'>
-                        <RiEdit2Line className='cursor-pointer fs-5 hover'/>
+                        <RiEdit2Line onClick={() => this.props.showModal(ModalType.Edit, this.state.itemState)} className='cursor-pointer fs-5 hover'/>
                     </Button>
                 </td>
             </tr>
