@@ -21,9 +21,9 @@ interface IState {
     //Table State
     page: number,
     pageSize: number,
-    orderBy: String,
+    orderBy: string,
     ascending: Boolean, 
-    filter: String, 
+    filter: string, 
     viewAll: Boolean,
     showSettings: boolean,
     //Modal Variables
@@ -200,7 +200,7 @@ export default class Dashboard extends React.Component<{}, IState> {
         this.setState({page: page}, () => { this.getProducts(); });
     }
 
-    applySettings = (pageSize: number, orderBy: String, ascending: Boolean, filter: String) => {
+    applySettings = (pageSize: number, orderBy: string, ascending: Boolean, filter: string) => {
         this.setState({pageSize: pageSize, orderBy: orderBy, ascending: ascending, filter: filter}, () => { this.getProducts(); });
     }
 
