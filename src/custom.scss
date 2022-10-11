@@ -35,6 +35,16 @@ $theme-colors: (
 	color: white;
 }
 
+.pagination-item{
+	width: 1.7rem;
+	height: 1.7rem;
+	background: transparent;
+}
+
+.pagination-item.active-page{
+	background-color: #005da8;
+	color: white;
+}
 
 @import '~react-toastify/scss/_variables.scss';
 @import '~bootstrap/scss/bootstrap';
