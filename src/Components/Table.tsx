@@ -6,14 +6,17 @@ interface IState {
 
 interface IProps {
     handleCheck: Function,
+    showModal: Function,
     data: Array<Object>,
 }
 
+/**
+ * This component is used to render the table body and headings.
+ */
 export default class Table extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            loading: true
         };
     }
 
@@ -22,7 +25,7 @@ export default class Table extends React.Component<IProps, IState> {
      * 
      * @param data - The data to render
      * @returns - The table
-     */
+    */
     private renderTable = (data: any): React.ReactNode =>{
         return (
             <table className='table table-striped'>
@@ -37,7 +40,7 @@ export default class Table extends React.Component<IProps, IState> {
                 </thead>
                 <tbody>
                     {data.map((product: any) => {
-                        return (<Product key={product.Id} item={product} handleCheck={this.props.handleCheck} />);
+                        return (<Product showModal={this.props.showModal} key={product.Id} item={product} handleCheck={this.props.handleCheck} />);
                     })}  
                 </tbody>
             </table>
@@ -50,7 +53,7 @@ export default class Table extends React.Component<IProps, IState> {
         let contents = this.props.data.length == 0 ? 
         <div className='loader d-flex flex-column align-items-center justify-content-center'>
             <img src="Media/Loader.svg"/>
-            <p><em>Loading Products</em></p>
+            <p className='pt-3'><em>Loading Products</em></p>
         </div> : 
         this.renderTable(this.props.data);
 
