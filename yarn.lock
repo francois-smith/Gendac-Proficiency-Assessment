@@ -7284,7 +7284,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7546,6 +7546,21 @@ react-transition-group@^4.4.2:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-ultimate-pagination-bootstrap-4@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-ultimate-pagination-bootstrap-4/-/react-ultimate-pagination-bootstrap-4-1.1.0.tgz#7b7a22a9b5510f7c6e4b37a6e082b02e7cb938e7"
+  integrity sha512-U80avOtbRAio9At4InBXNIc5AOHTSuSk6fteZHsTJ0VPIxiTWA+FWiMj0MrW9Pdo8/q1b4pAWg5LI2JQOWmaZg==
+  dependencies:
+    react-ultimate-pagination "1.1.0"
+
+react-ultimate-pagination@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-ultimate-pagination/-/react-ultimate-pagination-1.1.0.tgz#b19117122d357267b8d6d39e37a06d91bfe42e3f"
+  integrity sha512-aarXkb1FHk/gNNrdDkygediPoSkaCQ9Pmh2nUffiM3DmEAzjDsrLbPiQxOnILj+25280I4Q+3bHIn46B84pC7g==
+  dependencies:
+    prop-types "^15.0.0"
+    ultimate-pagination "1.0.0"
 
 react@^18.2.0:
   version "18.2.0"
@@ -8603,6 +8618,11 @@ typescript@^4.4.2:
   version "4.8.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
   integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+
+ultimate-pagination@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ultimate-pagination/-/ultimate-pagination-1.0.0.tgz#1f9f5465678d7410159d5a172c2013465e9bd85f"
+  integrity sha512-bJNroO5GM11McB9RJ1rHZGiXV/jU89Qwc6U5wR8jZuk0uFVajIvUDGPiROVvNMApvh7Ij3cPoeG5V3UlF4GvOA==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"

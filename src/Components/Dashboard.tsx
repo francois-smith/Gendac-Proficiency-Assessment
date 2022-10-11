@@ -1,27 +1,34 @@
+//Component Imports
 import React from 'react';
 import Table from './Table';
+import TablePagination from './TablePagination';
+
+// Views import
 import CreateProduct from '../views/CreateProductModal';
+
+// Services and Utils import
+import Toast from '../utils/Toasts'; 
+import Requests from '../services/api-requests';
+
+// Icon imports
 import { ToastContainer } from 'react-toastify';
 import { MdDeleteSweep } from 'react-icons/md';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import Requests from '../services/api-requests';
-import Toast from '../utils/Toasts'; 
 
 interface IState {
-    page: Number,
-    pageSize: Number,
+    page: number,
+    pageSize: number,
     orderBy: String,
     ascending: Boolean, 
     filter: String, 
     viewAll: Boolean,
     modal: boolean,
-    selected: Array<Object>
+    selected: Array<Object>,
+    data: Array<Object>,
+    pages: number,
 }
 
-interface IProps {
-}
-
-export default class Dashboard extends React.Component<IProps, IState> {
+export default class Dashboard extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -32,8 +39,50 @@ export default class Dashboard extends React.Component<IProps, IState> {
             filter: "",
             viewAll: false,
             modal: false,
-            selected: []
+            selected: [],
+            data: [],
+            pages: 0
         };
+    }
+
+    /**
+     * Wait for the component to mount and then fetch the data
+     */
+    componentDidMount = (): void =>{
+        this.getProducts();
+        this.getPageNumbers();
+    }
+
+    /**
+     * @brief Fetches the data from the API and sets the state. This new data gets passed to the table.
+     */
+    getProducts = async (): Promise<void> => {
+        //If the user wants all the products
+        if(this.state.viewAll) {
+            Requests.getAll()
+            .then((response) => {
+                this.setState({data: response.data});
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        } 
+        else {
+            let params = new Map<String, any>();
+            params.set('page', this.state.page);
+            params.set('pageSize', this.state.pageSize);
+            params.set('orderBy', this.state.orderBy);
+            params.set('ascending', this.state.ascending);
+            params.set('filter', this.state.filter);
+
+            Requests.customSearch(params)
+            .then((response) => {
+                this.setState({data: response.data.Results});
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
     }
 
     /**
@@ -47,20 +96,20 @@ export default class Dashboard extends React.Component<IProps, IState> {
      * @brief Passed into modal, bounded to the close button.
      */
     hideModal = (): void =>{
-        this.setState({modal: false});
+        this.setState({modal: false}, () => { this.getProducts(); });
     }
     
     /**
-     * @brief Handles when checkboxes are checked and manages array of selected items.
+     * @brief Handles when checkboxes are checked and manages array of selected items. Passed to table.
      * @param checked - Whether the checkbox is checked or not
      * @param productId - The id of the item
      */
     handleCheck = (checked: Boolean, productId: Number) => {
         if(checked){
-            this.setState({selected: [...this.state.selected, productId]}, () => console.log(this.state.selected));
+            this.setState({selected: [...this.state.selected, productId]});
         } 
         else{
-            this.setState({selected: this.state.selected.filter((item) => item !== productId)}, () => console.log(this.state.selected));
+            this.setState({selected: this.state.selected.filter((item) => item !== productId)});
         }
     }
 
@@ -74,8 +123,28 @@ export default class Dashboard extends React.Component<IProps, IState> {
                 console.log(error);
             });
         }
+
+        //Update the table and show a toast that the items were deleted
         Toast.showSuccessToast("Products deleted successfully!");
-        this.setState({selected: []});
+        this.setState({selected: []}, () => { this.getProducts(); });
+    }
+
+    /**
+     * Function to caclulate the number of pages based on the page size and total number of items
+     * @returns The table with the data
+     */
+    getPageNumbers = () => {
+        Requests.getAll()
+        .then((response) => {
+            this.setState({pages: Math.ceil(response.data.length / this.state.pageSize)}, () => { console.log(this.state.pages) });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+     
+    handlePageChange = (page: number) => {
+        this.setState({page: page}, () => { console.log(this.state.page) });
     }
 
     render(): React.ReactNode {
@@ -94,11 +163,14 @@ export default class Dashboard extends React.Component<IProps, IState> {
                             </button> : null
                         }
                         <div className='d-flex align-items-center justify-content-center'>
-                            <FiMoreHorizontal className='fs-2 cursor-pointer'/>
+                            <FiMoreHorizontal className='fs-3 cursor-pointer'/>
                         </div>
                     </div>
                 </div>
-                <Table page={this.state.page} pageSize={this.state.pageSize} orderBy={this.state.orderBy} ascending={this.state.ascending} filter={this.state.filter} viewAll={this.state.viewAll} handleCheck={this.handleCheck}/>
+                <div className='table-container'>
+                    <Table data={this.state.data} handleCheck={this.handleCheck}/>
+                    <TablePagination page={this.state.page} pages={this.state.pages} handlePageChange={this.handlePageChange.bind(this)}/>
+                </div>
                 <CreateProduct show={this.state.modal} hideModal={this.hideModal.bind(this)}/>
                 <ToastContainer position="top-center" autoClose={5000} hideProgressBar newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored"/>
             </div>

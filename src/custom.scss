@@ -21,6 +21,20 @@ $theme-colors: (
 	color: #005da8;
 }
 
+.loader img{
+	width: 125px;
+	height: 125px;
+}
+
+.loader{
+	height: 75vh;
+}
+
+#table-head{
+	background-color: #5b7f9e;
+	color: white;
+}
+
 
 @import '~react-toastify/scss/_variables.scss';
 @import '~bootstrap/scss/bootstrap';
