@@ -208,8 +208,14 @@ export default class Dashboard extends React.Component<{}, IState> {
      */
     applySettings = (pageSize: number, orderBy: string, ascending: boolean, filter: string, viewAll: boolean) => {
         this.setState({pageSize: pageSize, orderBy: orderBy, ascending: ascending, filter: filter, viewAll: viewAll}, () => {
-            this.getProducts(); 
-            this.getPageNumbers();
+            if(this.state.viewAll) {
+                this.setState({data: []}, () => { this.getProducts(); });
+                this.setState({pages: 0, total: 0});
+            }
+            else{
+                this.getProducts(); 
+                this.getPageNumbers();
+            }
         });
     }
 
