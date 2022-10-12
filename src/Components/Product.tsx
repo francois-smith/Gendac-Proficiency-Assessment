@@ -50,8 +50,8 @@ export default class Product extends React.Component<IProps, IState> {
                 })}
                 {/* Adds trigger icon to show more settings */}
                 <td key="action" className='text-end'>
-                    <Button variant="none" size="sm" className='me-2'>
-                        <RiEdit2Line onClick={() => this.props.showModal(ModalType.Edit, this.state.itemState)} className='cursor-pointer fs-5 hover'/>
+                    <Button variant="none" size="sm" className='me-2' onClick={() => this.props.showModal(ModalType.Edit, this.state.itemState)}>
+                        <RiEdit2Line className='cursor-pointer fs-5 hover'/>
                     </Button>
                 </td>
             </tr>
