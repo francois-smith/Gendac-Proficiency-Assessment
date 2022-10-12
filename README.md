@@ -12,8 +12,6 @@
 
 The application is set up using a react typescript with the styling done with bootstrap and Sass. The application allows an easy to use interface to communicate with an API to perform CRUD operations.
 
-<br/>
-
 
 ## Built With
 
@@ -21,8 +19,6 @@ The application is set up using a react typescript with the styling done with bo
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)<br/>
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) <br/>
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
-
-<br/>
 
 
 ## Getting Started
@@ -46,23 +42,19 @@ Make sure you have the latest LTS version of node installed. You can download it
    ```
 4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-<br/>
-
 
 ## Usage
 ### Layout
-I opted for a table layout because it makes the most sense in terms of a products API, the dasboard follows the same colour scheme as gendac's logo to make it feel like the Dashboard was develeped specifically for them.
+I opted for a table layout because it makes the most sense in terms of a products API, the dasboard follows the same colour scheme as gendac to make it feel like the Dashboard was develeped specifically for them.
 
-The top right of the dashboard contains the main controls for the table with a custom settings menu that can be used to modify the table row amount and to apply basic filters.
+The top right of the dashboard contains the main controls for the table with a custom settings menu that can be used to modify the table row amount and to apply basic filters. There is also a pagignation control at the bottom of the table to traverse the product list.
 
-Unit tests can be don by running the following command in the root directory
+Unit tests can be done by running the following command in the root directory
 ```sh
-npm run tests
+npm run test
 ```
 
-The dashboard contains toast messages relaying information to the user such as errors and when the table is altered.
-
-The modal is has multiple uses where it updates it internal layout and state depending if you want to create or edit an event.
+The dashboard contains toast messages relaying information to the user such as errors and when the table is altered. The modal is has multiple uses where it updates it internal layout and state depending if you want to create or edit an event.
 
 <br/>
 
