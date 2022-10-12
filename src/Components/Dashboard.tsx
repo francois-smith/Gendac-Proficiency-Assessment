@@ -22,9 +22,9 @@ interface IState {
     page: number,
     pageSize: number,
     orderBy: string,
-    ascending: Boolean, 
+    ascending: boolean, 
     filter: string, 
-    viewAll: Boolean,
+    viewAll: boolean,
     showSettings: boolean,
     //Modal Variables
     modal: boolean,
@@ -43,7 +43,7 @@ export default class Dashboard extends React.Component<{}, IState> {
         this.state = {
             //Table State
             page: 1,
-            pageSize: 14,
+            pageSize: 10,
             orderBy: "Id",
             ascending: true,
             filter: "",
@@ -177,7 +177,6 @@ export default class Dashboard extends React.Component<{}, IState> {
         this.setState({selected: []}, () => { this.getProducts(); });
     }
 
-
     /**
      * Function to caclulate the number of pages based on the page size and total number of items
      * @returns The table with the data
@@ -200,8 +199,18 @@ export default class Dashboard extends React.Component<{}, IState> {
         this.setState({page: page}, () => { this.getProducts(); });
     }
 
-    applySettings = (pageSize: number, orderBy: string, ascending: Boolean, filter: string) => {
-        this.setState({pageSize: pageSize, orderBy: orderBy, ascending: ascending, filter: filter}, () => { this.getProducts(); });
+    /**
+     * @brief Handles when the save button is clicked and rerenders the table with new data.
+     * @param pageSize - Updated PageSize
+     * @param orderBy - Updated OrderBy
+     * @param ascending - Updated Ascending
+     * @param filter - Updated Filter
+     */
+    applySettings = (pageSize: number, orderBy: string, ascending: boolean, filter: string, viewAll: boolean) => {
+        this.setState({pageSize: pageSize, orderBy: orderBy, ascending: ascending, filter: filter, viewAll: viewAll}, () => {
+            this.getProducts(); 
+            this.getPageNumbers();
+        });
     }
 
     render(): React.ReactNode {
@@ -219,10 +228,10 @@ export default class Dashboard extends React.Component<{}, IState> {
                                 <MdDeleteSweep  className='fs-4'/>
                             </button> : null
                         }
-                        <div className='d-flex align-items-center justify-content-center position-relative' onClick={this.toggleSettings}>
-                            <FiMoreHorizontal className='fs-3 cursor-pointer'/>
+                        <div className='d-flex align-items-center justify-content-center position-relative'>
+                            <FiMoreHorizontal className='fs-3 cursor-pointer' onClick={this.toggleSettings}/>
                             {/* Pass in all date to settings so when they get updated, changes can occur */}
-                            <SettingMenu applySettings={this.applySettings} show={this.state.showSettings} hideSettings={this.toggleSettings} pageSize={this.state.pageSize} filter={this.state.filter} orderBy={this.state.orderBy} ascending={this.state.ascending}/>
+                            <SettingMenu  applySettings={this.applySettings} show={this.state.showSettings} hideSettings={this.toggleSettings} viewAll={this.state.viewAll} pageSize={this.state.pageSize} filter={this.state.filter} orderBy={this.state.orderBy} ascending={this.state.ascending}/>
                         </div>
                     </div>
                 </div>
