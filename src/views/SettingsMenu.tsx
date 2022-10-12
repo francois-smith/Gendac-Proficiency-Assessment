@@ -1,11 +1,12 @@
 import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import {AiOutlineCaretDown} from 'react-icons/ai';
 
 interface IState {
     pageSize: number,
     orderBy: string,
-    ascending: Boolean,
-    filter: string
+    ascending: boolean,
+    filter: string,
+    viewAll: boolean,
 }
 
 interface IProps {
@@ -14,8 +15,9 @@ interface IProps {
     applySettings: Function,
     pageSize: number,
     orderBy: string, 
-    ascending: Boolean, 
-    filter: string
+    ascending: boolean, 
+    filter: string,
+    viewAll: boolean
 }
 
 /**
@@ -28,7 +30,8 @@ export default class SettingMenu extends React.Component<IProps, IState> {
             pageSize: this.props.pageSize,
             orderBy: this.props.orderBy,
             ascending: this.props.ascending,
-            filter: this.props.filter
+            filter: this.props.filter,
+            viewAll: this.props.viewAll,
         };
         this.handleMenuClose = this.handleMenuClose.bind(this);
     }
@@ -41,54 +44,51 @@ export default class SettingMenu extends React.Component<IProps, IState> {
     }
 
     applySettings = (): void => {
-        this.props.applySettings(this.state.pageSize, this.state.orderBy, this.state.ascending, this.state.filter);
+        this.props.applySettings(this.state.pageSize, this.state.orderBy, this.state.ascending, this.state.filter, this.state.viewAll);
+        this.props.hideSettings();
     }
     
     //popup menu to alter table settings
     render = (): React.ReactNode => {
         return (
             <div className={`setting-menu p-3 rounded border position-absolute bg-white shadow-sm text-muted ${this.props.show ? "d-block" : "d-none"}`}>
-                <p>Table Settings</p>
+                <h5 className="mb-3">Table Settings</h5>
 
-
-                <div className="d-flex flex-row justify-content-between">
-                    <p>Order By</p>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="light" id="dropdown-basic">
-                            {this.state.orderBy}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => this.setState({orderBy: "name"})}>Name</Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({orderBy: "category"})}>Category</Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({orderBy: "price"})}>Price</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                <div className="form-group mb-3">
+                    <label htmlFor="orderBy">Order By</label>
+                    <select className="form-select p-1" id="orderBy" value={this.state.orderBy} onChange={(e) => this.setState({orderBy: e.target.value})}>
+                        <option value="Id">Id</option>
+                        <option value="Name">Name</option>
+                        <option value="Category">Category</option>
+                        <option value="Price">Price</option>
+                    </select>
                 </div>
 
-                <div className="d-flex flex-row justify-content-between">
-                    <p>Ascending</p>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="light" id="dropdown-basic">
-                            {this.state.ascending ? "True" : "False"}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => this.setState({ascending: true})}>True</Dropdown.Item>
-
-                            <Dropdown.Item onClick={() => this.setState({ascending: false})}>False</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
-
-                <div className="d-flex flex-row justify-content-between">
-                    <p>Filter</p>
-                    <input type="text" className="form-control" value={this.state.filter} onChange={(e) => this.setState({filter: e.target.value})}/>
+                <div className="form-group mb-3">
+                    <div className="form-check form-switch">
+                        <label htmlFor="ascending">Ascending</label>
+                        <input className="form-check-input" type="checkbox" id="ascending" checked={this.state.ascending} onChange={(e) => this.setState({ascending: e.target.checked})}/>
+                    </div>
                 </div>
 
                 <hr />
+
                 <div className='settings-footer d-flex'>
                     <div className='d-flex align-items-center'>
                         <label htmlFor='rows-input' className='me-2'>Rows on page: </label>
-                        <input type='number' id="rows-input" value={this.state.pageSize} className='form-control p-1 w-25 text-end'/>
+                        <input type='number' id="rows-input" onChange={e => this.setState({pageSize: Number(e.target.value)})} value={this.state.pageSize} className='form-control p-1 w-25 text-end'/>
+                        {/* clickable text that opens a dropdown */}
+                        <div className="dropdown ms-2">
+                            <a className='text-muted' role="button" id="view-all-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                                <AiOutlineCaretDown />
+                            </a>
+                            <div className="dropdown-menu p-2" aria-labelledby="view-all-menu">
+                                <button className="btn btn-warning w-100" onClick={() => this.setState({viewAll: true})}>View All</button>
+                                <small className="form-text text-muted">This might take a while to load.</small>
+                            </div>
+                        </div>
+                        
+
                     </div>
                     <div className='d-flex'>
                         <button className='btn btn-secondary me-2' onClick={this.handleMenuClose}>Cancel</button>
