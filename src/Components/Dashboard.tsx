@@ -228,7 +228,7 @@ export default class Dashboard extends React.Component<{}, IState> {
             <div className='p-5 mx-5'>
                 <div className="d-flex justify-content-between align-items-center mb-3">
                     <div className='d-flex align-items-center'>
-                        <img src="/media/GendacLogo.png" className='main-logo me-2'/>
+                        <img src="/media/GendacLogo.png" className='main-logo me-2' alt='Gendac Logo'/>
                         <span className='text-primary mb-1 fs-1'>Products</span>
                     </div>
                     <div className='d-flex'>

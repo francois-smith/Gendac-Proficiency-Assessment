@@ -37,7 +37,7 @@ export default class TablePagination extends React.Component<IProps, IState> {
             <div>
                 {/* Check if products have been loaded to determine the pages */}
                 
-                {this.props.pages > 1 && this.props.data.length != 0 ? 
+                {this.props.pages > 1 && this.props.data.length !== 0 ? 
                     <div className='d-flex justify-content-between'>
                         <div className='d-flex align-items-center'>
                             <BiFirstPage className='fs-4 cursor-pointer'onClick={() => this.changePage(1)}/>
@@ -46,34 +46,34 @@ export default class TablePagination extends React.Component<IProps, IState> {
                             {/* This entire block of code just conditionally renders the page numbers so that there is no pop in and out */}
                             {this.props.page < 3 ?
                                 <div className='d-flex'>
-                                    <PaginationButton changePage={this.changePage} page={1} active={this.props.page == 1}/>
-                                    <PaginationButton changePage={this.changePage} page={2} active={this.props.page == 2}/>
-                                    <PaginationButton changePage={this.changePage} page={3} active={this.props.page == 3}/>
-                                    <PaginationButton changePage={this.changePage} page={4} active={this.props.page == 4}/>
-                                    <PaginationButton changePage={this.changePage} page={5} active={this.props.page == 5}/>
+                                    <PaginationButton changePage={this.changePage} page={1} active={this.props.page === 1}/>
+                                    <PaginationButton changePage={this.changePage} page={2} active={this.props.page === 2}/>
+                                    <PaginationButton changePage={this.changePage} page={3} active={this.props.page === 3}/>
+                                    <PaginationButton changePage={this.changePage} page={4} active={this.props.page === 4}/>
+                                    <PaginationButton changePage={this.changePage} page={5} active={this.props.page === 5}/>
                                 </div>
                                 :
                                 this.props.page > this.props.pages - 2?
                                 <div className='d-flex'>
-                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 4} active={this.props.page == this.props.pages - 4}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 3} active={this.props.page == this.props.pages - 3}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 2} active={this.props.page == this.props.pages - 2}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 1} active={this.props.page == this.props.pages - 1}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.pages} active={this.props.page == this.props.pages}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 4} active={this.props.page === this.props.pages - 4}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 3} active={this.props.page === this.props.pages - 3}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 2} active={this.props.page === this.props.pages - 2}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.pages - 1} active={this.props.page === this.props.pages - 1}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.pages} active={this.props.page === this.props.pages}/>
                                 </div>
                                 :
                                 this.props.pages > 5 ?
                                 <div className='d-flex'>
-                                    <PaginationButton changePage={this.changePage} page={this.props.page - 2} active={this.props.page == this.props.page - 2}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.page - 1} active={this.props.page == this.props.page - 1}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.page - 2} active={this.props.page === this.props.page - 2}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.page - 1} active={this.props.page === this.props.page - 1}/>
                                     <PaginationButton changePage={this.changePage} page={this.props.page} active={true}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.page + 1} active={this.props.page == this.props.page + 1}/>
-                                    <PaginationButton changePage={this.changePage} page={this.props.page + 2} active={this.props.page == this.props.page + 2}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.page + 1} active={this.props.page === this.props.page + 1}/>
+                                    <PaginationButton changePage={this.changePage} page={this.props.page + 2} active={this.props.page === this.props.page + 2}/>
                                 </div>
                                 :
                                 <div className='d-flex'>
                                     {Array.from(Array(this.props.pages).keys()).map((page) => {
-                                        return <PaginationButton changePage={this.changePage} page={page + 1} active={this.props.page == page + 1}/>
+                                        return <PaginationButton changePage={this.changePage} page={page + 1} active={this.props.page === page + 1}/>
                                     })}
                                 </div>
                             }
