@@ -1,46 +1,134 @@
-# Getting Started with Create React App
+﻿<h2 align="center">Francois Smith</h3>
+<h3 align="center">Proficiency Assessment | Gendac</h3>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+    <p>
+        Proficiency assessment for my application to join Gendac for a position to participate in part time vacation work.
+    </p>
+</div>
+<br/>
 
-## Available Scripts
+## About The Project
 
-In the project directory, you can run:
+The application is set up using a react typescript with the styling done with bootstrap and Sass. The application allows an easy to use interface to communicate with an API to perform CRUD operations.
 
-### `yarn start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Built With
 
-### `yarn test`
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) <br/>
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)<br/>
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) <br/>
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Make sure you have the latest LTS version of node installed. You can download it from [here](https://nodejs.org/en/)
+* Validate that you have node installed by running the following command in your terminal
+  ```sh
+    node -v
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
+1. Naviagte to the folder containing the project files
+2. Install NPM package dependencies
+   ```sh
+   npm install
+   ```
+3. Start a development server using
+   ```sh
+   npm run start
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### `yarn eject`
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
+### Layout
+I opted for a table layout because it makes the most sense in terms of a products API, the dasboard follows the same colour scheme as gendac's logo to make it feel like the Dashboard was develeped specifically for them.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The top right of the dashboard contains the main controls for the table with a custom settings menu that can be used to modify the table row amount and to apply basic filters.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Unit tests can be don by running the following command in the root directory
+```sh
+npm run tests
+```
 
-## Learn More
+The dashboard contains toast messages relaying information to the user such as errors and when the table is altered.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The modal is has multiple uses where it updates it internal layout and state depending if you want to create or edit an event.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
+
+## Project Structure
+
+### Root:
+
+    .
+    ├── public                  # Contains media and index.html
+    ├── src                     # Source files 
+    ├── jest.config.js          # Adds base config for Jest testing
+    ├── package.json            # Contains dependencies and scripts
+    ├── tsconfig.json           # Specifies the root files and the compiler options
+    └── README.md
+
+### Automated Tests:
+    * Very basic testing done to showcase ability to do it, but time constraints forced me to keep it basic *
+    .
+    ├── ...
+    ├── __tests__                       # Test files for the project
+    │   ├──  CreateProduct.test.tsx     # Basic test to showcase products        
+    └── ...
+
+### Components:
+
+    .
+    ├── ...
+    ├── components              # Contains main components for the app
+    │   ├── Dashboard.tsx       # Main Component, manages state of the app
+    │   ├── Table.tsx           # Renders a table of products, based on data from the dashboard
+    │   ├── Product.tsx         # Renders a row in the table, representing a product
+    │   ├── TablePagination.tsx # Component used to traverse the products
+    └── ...
+
+### Services:
+
+    .
+    ├── ...
+    ├── services                # Contains api connections and requests
+    │   ├── api-url.tsx         # Exports an axios call that can be used anywhere
+    │   ├── api-requests.tsx    # Predefined methods to interact with the API more easily
+    └── ...
+
+### Utils:
+
+    .
+    ├── ...
+    ├── utils                      # Contains methods commonly used within numerous components
+    │   ├── CustomTypes.tsx        # Contains types and enums
+    │   ├── ProductValidation.tsx  # Exports an interface to easily validate products
+    │   ├── Toasts.tsx             # Exports methods to display different toasts to the user
+    └── ...
+
+### Views:
+
+    .
+    ├── ...
+    ├── views                   # Contains components that are overlayed
+    │   ├── ProductModal.tsx    # Renders a modal used to create and edit products
+    │   ├── settingMenu.tsx     # Renders a popup that can alter the rendering of the table 
+    └── ...
+
+
+## Contact
+
+Francois Smith - contact@francois-smith.com
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
