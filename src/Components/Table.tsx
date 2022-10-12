@@ -31,7 +31,7 @@ export default class Table extends React.Component<IProps, IState> {
             <table className='table table-striped'>
                 <thead id="table-head">
                     <tr>
-                        <th key='checkbox'><input type='checkbox'/></th>
+                        <th key='spacer'></th>
                         <th key='name'>Name</th>
                         <th key='category'>Category</th>
                         <th key='price'>Price</th>
