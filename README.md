@@ -32,15 +32,16 @@ Make sure you have the latest LTS version of node installed. You can download it
 
 ### Installation
 1. Naviagte to the folder containing the project files
-2. Install NPM package dependencies
+2. Open the folder in your terminal
+3. Install NPM package dependencies
    ```sh
    npm install
    ```
-3. Start a development server using
+4. Start a development server using
    ```sh
    npm run start
    ```
-4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
 ## Usage
