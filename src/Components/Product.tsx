@@ -8,7 +8,7 @@ interface IState {
     checked: boolean
 }
 
-interface IProps {
+export interface IProps {
     item: Object,
     handleCheck: Function,
     showModal: Function,
@@ -41,12 +41,12 @@ export default class Product extends React.Component<IProps, IState> {
         return (
             <tr>
                 <td key="checkbox">
-                    <input className='cursor-pointer' type="checkbox" checked={this.state.checked} onChange={this.handleCheckboxChange.bind(this)}/>
+                    <input data-testid="product-checkbox" className='cursor-pointer' type="checkbox" checked={this.state.checked} onChange={this.handleCheckboxChange.bind(this)}/>
                 </td>
                 {/*Render the data*/}
                 {Array.from(this.state.itemState).map((item: any, i) => {
                     //get if from state
-                    if(item[0] !== "Id") return <td className='pe-none' key={i}>{item[1]}</td>
+                    if(item[0] !== "Id") return <td data-testid={`product-${item[0]}`} className='pe-none' key={i}>{item[1]}</td>
                 })}
                 {/* Adds trigger icon to show more settings */}
                 <td key="action" className='text-end'>
