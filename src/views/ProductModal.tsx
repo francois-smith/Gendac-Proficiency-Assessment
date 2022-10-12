@@ -150,7 +150,7 @@ export default class ProductModal extends React.Component<IProps, IState> {
             <div>
                 <Modal show={this.props.show} centered onHide={() => this.handleModalClose(false)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>{this.props.type == ModalType.Edit ? "Edit Product" : "Create Product"}</Modal.Title>
+                        <Modal.Title>{this.props.type === ModalType.Edit ? "Edit Product" : "Create Product"}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <form>
@@ -177,7 +177,7 @@ export default class ProductModal extends React.Component<IProps, IState> {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" className='w-100 p-2 text-white' onClick={this.validateProduct}>
-                            {this.props.type == ModalType.Edit ? "Update Product" : "Create Product"}
+                            {this.props.type === ModalType.Edit ? "Update Product" : "Create Product"}
                         </Button>
                     </Modal.Footer>
                 </Modal>

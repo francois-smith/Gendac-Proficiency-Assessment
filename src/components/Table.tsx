@@ -50,9 +50,9 @@ export default class Table extends React.Component<IProps, IState> {
     render = (): React.ReactNode => {
         // Contents are bound to the props being passed in
         // If no data has been fed a loading animation is shown
-        let contents = this.props.data.length == 0 ? 
+        let contents = this.props.data.length === 0 ? 
         <div className='loader d-flex flex-column align-items-center justify-content-center'>
-            <img src="Media/Loader.svg"/>
+            <img src="Media/Loader.svg" alt="Loding Animation"/>
             <p className='pt-3'><em>Loading Products</em></p>
         </div> : 
         this.renderTable(this.props.data);

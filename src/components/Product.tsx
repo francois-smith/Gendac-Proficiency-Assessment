@@ -47,6 +47,7 @@ export default class Product extends React.Component<IProps, IState> {
                 {Array.from(this.state.itemState).map((item: any, i) => {
                     //get if from state
                     if(item[0] !== "Id") return <td data-testid={`product-${item[0]}`} className='pe-none' key={i}>{item[1]}</td>
+                    else return null;
                 })}
                 {/* Adds trigger icon to show more settings */}
                 <td key="action" className='text-end'>

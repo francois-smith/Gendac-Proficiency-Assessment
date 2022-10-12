@@ -81,7 +81,7 @@ export default class SettingMenu extends React.Component<IProps, IState> {
                         <input type='number' id="rows-input" onChange={e => this.setState({pageSize: Number(e.target.value)})} value={this.state.pageSize} className='form-control p-1 w-25 text-end'/>
                         {/* clickable text that opens a dropdown */}
                         <div className="dropdown ms-2">
-                            <a className='text-muted' role="button" id="view-all-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="#" className='text-muted' role="button" id="view-all-menu" data-bs-toggle="dropdown" aria-expanded="false">
                                 <AiOutlineCaretDown />
                             </a>
                             <div className="dropdown-menu p-2" aria-labelledby="view-all-menu">
