@@ -37,6 +37,9 @@ interface IState {
     total: number
 }
 
+/**
+ * @description The main dashboard page. This is where the user can view all the products and perform CRUD operations.
+ */
 export default class Dashboard extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
@@ -140,13 +143,14 @@ export default class Dashboard extends React.Component<{}, IState> {
             }
         });
     }
-
   
+    /**
+     * @brief Toggles the settings menu of the table.
+     */
     toggleSettings = (): void =>{
         this.setState({showSettings: !this.state.showSettings});
     }
 
-    
     /**
      * @brief Handles when checkboxes are checked and manages array of selected items.
      * @param checked - Whether the checkbox is checked or not
@@ -236,13 +240,16 @@ export default class Dashboard extends React.Component<{}, IState> {
                         }
                         <div className='d-flex align-items-center justify-content-center position-relative'>
                             <FiMoreHorizontal className='fs-3 cursor-pointer' onClick={this.toggleSettings}/>
-                            {/* Pass in all date to settings so when they get updated, changes can occur */}
+                            {/* Pass in all data to settings so when they get updated, changes can occur */}
                             <SettingMenu  applySettings={this.applySettings} show={this.state.showSettings} hideSettings={this.toggleSettings} viewAll={this.state.viewAll} pageSize={this.state.pageSize} filter={this.state.filter} orderBy={this.state.orderBy} ascending={this.state.ascending}/>
                         </div>
                     </div>
                 </div>
                 <div className='table-container'>
+                    {/* Render the table with the fetched data */}
                     <Table showModal={this.showModal} data={this.state.data} handleCheck={this.handleCheck}/>
+
+                    {/* Pass in necessary information to allow pagination to build itself based on current settings */}
                     <TablePagination data={this.state.data} total={this.state.total} pageSize={this.state.pageSize} page={this.state.page} pages={this.state.pages} handlePageChange={this.handlePageChange.bind(this)}/>
                     <ProductModal type={this.state.modalType} product={this.state.editProduct} show={this.state.modal} hideModal={this.hideModal.bind(this)}/>
                 </div>

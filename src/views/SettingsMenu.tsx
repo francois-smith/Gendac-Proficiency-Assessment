@@ -21,7 +21,7 @@ interface IProps {
 }
 
 /**
- * @description This class is used to display the modal for creating and updating products.
+ * @description Used to show a overlay to alter the table settings.
  */
 export default class SettingMenu extends React.Component<IProps, IState> {
     constructor(props: any) {
@@ -43,12 +43,14 @@ export default class SettingMenu extends React.Component<IProps, IState> {
         this.props.hideSettings();
     }
 
+    /**
+     * @brief Applies the updated settings and closes the menu. Forcing a refresh of the table.
+     */
     applySettings = (): void => {
         this.props.applySettings(this.state.pageSize, this.state.orderBy, this.state.ascending, this.state.filter, this.state.viewAll);
         this.props.hideSettings();
     }
     
-    //popup menu to alter table settings
     render = (): React.ReactNode => {
         return (
             <div className={`setting-menu p-3 rounded border position-absolute bg-white shadow-sm text-muted ${this.props.show ? "d-block" : "d-none"}`}>

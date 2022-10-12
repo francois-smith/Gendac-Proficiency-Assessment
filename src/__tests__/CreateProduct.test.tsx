@@ -4,6 +4,11 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import Product, { IProps } from "../components/Product";
 import "@testing-library/jest-dom/extend-expect";
 
+/**
+ * @jest-environment jsdom
+ * @brief This test is to check if the product component is rendered correctly, and functions as expected.
+ * @returns Test Product Component
+ */
 const setup = () => {
     const props: IProps = {
         item: {
@@ -19,6 +24,9 @@ const setup = () => {
     return { props, getByTestId };
 }
 
+/**
+ * @brief Basic test to check if the component is working as intended.
+ */
 describe("Test creation of product in table:", () => {
     test("Should contain values of item passed in", async () => {
         const { getByTestId } = setup()

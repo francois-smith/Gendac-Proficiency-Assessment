@@ -65,7 +65,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield;
 }
 
 @import '~react-toastify/scss/_variables.scss';
