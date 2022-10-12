@@ -1,7 +1,7 @@
 import React from "react";
 import {describe, expect, test} from '@jest/globals';
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import Product, { IProps } from "../components/Product";
+import Product, { IProps } from "../component/Product";
 import "@testing-library/jest-dom/extend-expect";
 
 /**
