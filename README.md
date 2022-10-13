@@ -31,7 +31,7 @@ Make sure you have the latest LTS version of node installed. You can download it
     ```
 
 ### Installation
-1. Naviagte to the folder containing the project files
+1. Navigate to the folder containing the project files
 2. Open the folder in your terminal
 3. Install NPM package dependencies
    ```sh
